@@ -7,7 +7,7 @@
 
 source .scripts/logging_utils.sh
 
-(set +x; startgroup "Configure Docker")
+startgroup "Configure Docker"
 
 set -xeo pipefail
 
@@ -69,9 +69,9 @@ DOCKER_RUN_ARGS="${CONDA_FORGE_DOCKER_RUN_ARGS}"
 if [ -z "${CI}" ]; then
     DOCKER_RUN_ARGS="-it ${DOCKER_RUN_ARGS}"
 fi
-(set +x; endgroup "Configure Docker")
+endgroup "Configure Docker"
 
-(set +x; startgroup "Start Docker")
+startgroup "Start Docker"
 export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}"
 docker run ${DOCKER_RUN_ARGS} \
            -v "${RECIPE_ROOT}":/home/conda/recipe_root:rw,z,delegated \

@@ -18,7 +18,7 @@ function startgroup {
         * )
             echo "$1";;
     esac
-}
+} 2> /dev/null
 
 function endgroup {
     # End a foldable group of log lines
@@ -32,4 +32,4 @@ function endgroup {
         github_actions )
             echo "::endgroup::";;
     esac
-}
+} 2> /dev/null
