@@ -1,1 +1,2 @@
-{}
+provider:
+  linux: github_actions
