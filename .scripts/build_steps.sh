@@ -40,6 +40,7 @@ make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 endgroup "Configuring conda"
 
 startgroup "Running conda command"
+
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     if [[ "x${BUILD_OUTPUT_ID:-}" != "x" ]]; then
         EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --output-id ${BUILD_OUTPUT_ID}"
@@ -57,6 +58,7 @@ else
     endgroup "Running conda command"
 
     startgroup "Uploading packages"
+
     if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
         upload_package  "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
     fi
@@ -64,4 +66,5 @@ else
 fi
 
 startgroup "Final checks"
+
 touch "${FEEDSTOCK_ROOT}/build_artifacts/conda-forge-build-done-${CONFIG}"
