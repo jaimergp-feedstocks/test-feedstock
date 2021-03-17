@@ -67,8 +67,8 @@ jobs:
         conda.exe build "recipe" -m .ci_support\%CONFIG%.yaml
         if errorlevel 1 exit 1
         set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
-        set "GIT_BRANCH=%GITHUB_REF:refs/heads/=%"
-        if /i "%UPLOAD_PACKAGES%" == "true" (
+        set "GIT_BRANCH=%GITHUB_REF:*/=%"
+        if %UPLOAD_PACKAGES% == "True" (
           upload_package  .\ ".\recipe" .ci_support\%CONFIG%.yaml
         )
       env:
