@@ -93,3 +93,5 @@ docker run ${DOCKER_RUN_ARGS} \
 
 # verify that the end of the script was reached
 test -f "$DONE_CANARY"
+# This closes the last group opened in `build_steps.sh`
+endgroup "Final checks"
