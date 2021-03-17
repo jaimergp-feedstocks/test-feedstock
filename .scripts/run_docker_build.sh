@@ -7,7 +7,7 @@
 
 source .scripts/logging_utils.sh
 
-{ set +x; startgroup "Configure Docker" } 2> /dev/null
+{ set +x; startgroup "Configure Docker"; } 2> /dev/null
 
 set -xeo pipefail
 
@@ -70,9 +70,9 @@ if [ -z "${CI}" ]; then
     DOCKER_RUN_ARGS="-it ${DOCKER_RUN_ARGS}"
 fi
 
-{ set +x; endgroup "Configure Docker" } 2> /dev/null
+{ set +x; endgroup "Configure Docker"; } 2> /dev/null
 
-{ set +x; startgroup "Start Docker" } 2> /dev/null
+{ set +x; startgroup "Start Docker"; } 2> /dev/null
 export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}"
 docker run ${DOCKER_RUN_ARGS} \
            -v "${RECIPE_ROOT}":/home/conda/recipe_root:rw,z,delegated \
@@ -96,4 +96,4 @@ docker run ${DOCKER_RUN_ARGS} \
 test -f "$DONE_CANARY"
 
 # This closes the last group opened in `build_steps.sh`
-{ set +x; endgroup "Final checks" } 2> /dev/null
+{ set +x; endgroup "Final checks"; } 2> /dev/null
