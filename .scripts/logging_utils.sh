@@ -7,15 +7,6 @@
 function startgroup {
     # Start a foldable group of log lines
     # Pass a single argument, quoted
-
-    # Ccheck the status of xtrace
-    # We want to disable it if it's ON to
-    # prevent duplicated group tags
-    setx_was_on=false
-    if [ -o xtrace ]; then
-        set +x  # disable temporarily
-        setx_was_on=true
-    fi
     case ${CI:-} in
         azure )
             echo "##[group]$1";;
@@ -27,20 +18,12 @@ function startgroup {
         * )
             echo "$1";;
     esac
-
-    # If it was on, reenable
-    $setx_was_on && set -x
 }
 
 function endgroup {
     # End a foldable group of log lines
     # Pass a single argument, quoted
 
-    setx_was_on=false
-    if [ -o xtrace ]; then
-        set +x
-        setx_was_on=true
-    fi
     case ${CI:-} in
         azure )
             echo "##[endgroup]";;
@@ -49,6 +32,4 @@ function endgroup {
         github_actions )
             echo "::endgroup::";;
     esac
-
-    $setx_was_on && set -x
 }
