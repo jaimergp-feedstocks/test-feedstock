@@ -73,6 +73,7 @@ fi
 ( { set +x; endgroup "Configure Docker"; } 2> /dev/null )
 
 ( { set +x; startgroup "Start Docker"; } 2> /dev/null )
+
 export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}"
 docker run ${DOCKER_RUN_ARGS} \
            -v "${RECIPE_ROOT}":/home/conda/recipe_root:rw,z,delegated \
