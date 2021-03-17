@@ -40,8 +40,6 @@ make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
 ( { set +x; endgroup "Configuring conda"; } 2> /dev/null )
 
-( { set +x; startgroup "Running conda command"; } 2> /dev/null )
-
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     if [[ "x${BUILD_OUTPUT_ID:-}" != "x" ]]; then
         EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --output-id ${BUILD_OUTPUT_ID}"
@@ -50,16 +48,12 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
         ${EXTRA_CB_OPTIONS:-} \
         --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml"
 
-    ( { set +x; endgroup "Running conda command"; } 2> /dev/null )
-
     # Drop into an interactive shell
     /bin/bash
 else
     conda $BUILD_CMD "${RECIPE_ROOT}" -m "${CI_SUPPORT}/${CONFIG}.yaml" \
         --suppress-variables ${EXTRA_CB_OPTIONS:-} \
         --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml"
-
-    ( { set +x; endgroup "Running conda command"; } 2> /dev/null )
 
     ( { set +x; startgroup "Uploading packages"; } 2> /dev/null )
 
